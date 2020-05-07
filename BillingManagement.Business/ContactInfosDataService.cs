@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+//gg
 namespace BillingManagement.Business
 {
     class ContactInfosDataService : IDataService<ContactInfo>
