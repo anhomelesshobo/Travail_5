@@ -10,7 +10,18 @@ namespace BillingManagement.UI.ViewModels
     class MainViewModel : BaseViewModel
     {
 		private BaseViewModel _vm;
+		private bool buttonenabled = true;
 
+
+		public Boolean ButtonEnabled 
+		{
+			get { return buttonenabled; }
+			set
+			{
+				buttonenabled = value; 
+				OnPropertyChanged("ButtonEnabled"); // 
+			}
+		}
 		public BaseViewModel VM
 		{
 			get { return _vm; }
@@ -39,6 +50,7 @@ namespace BillingManagement.UI.ViewModels
 
 		public DelegateCommand<object> AddNewItemCommand { get; private set; }
 
+		public DelegateCommand<Customer> SearchCommand { get; private set; }
 		public RelayCommand CloseApplicationCommand { get; set; }
 		public DelegateCommand<Invoice> DisplayInvoiceCommand { get; private set; }
 		public DelegateCommand<Customer> DisplayCustomerCommand { get; private set; }
@@ -48,8 +60,9 @@ namespace BillingManagement.UI.ViewModels
 
 		public MainViewModel()
 		{
+			SearchCommand = new DelegateCommand<Customer>(searchcommand);
 			ChangeViewCommand = new ChangeViewCommand(ChangeView);
-			CloseApplicationCommand = new RelayCommand(CloseApplication);
+			CloseApplicationCommand = new RelayCommand(closeapplication);
 			DisplayInvoiceCommand = new DelegateCommand<Invoice>(DisplayInvoice);
 			DisplayCustomerCommand = new DelegateCommand<Customer>(DisplayCustomer);
 
@@ -70,9 +83,11 @@ namespace BillingManagement.UI.ViewModels
 			switch (vm)
 			{
 				case "customers":
-					VM = customerViewModel;
+					ButtonEnabled = true;
+					VM = customerViewModel;					
 					break;
 				case "invoices":
+					ButtonEnabled = false;
 					VM = invoiceViewModel;
 					break;
 			}
@@ -115,7 +130,11 @@ namespace BillingManagement.UI.ViewModels
 			return result;
 		}
 
-		private void CloseApplication(object parameter)
+		private void searchcommand(object parameter)
+		{
+			
+		}
+		private void closeapplication(object parameter)
 		{
 			App.Current.Shutdown();
 		}

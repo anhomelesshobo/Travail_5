@@ -53,10 +53,6 @@ namespace BillingManagement.UI.ViewModels
             Debug.WriteLine(Customers.Count);
         }
 
-        //IEnumerable<Customer> GetAllCustomersByLastName(ObservableCollection<Customer> customers)
-        //{
-        //    return customers.OrderBy(c => c.LastName);
-        //}
 
         private void DeleteCustomer(Customer c)
         {

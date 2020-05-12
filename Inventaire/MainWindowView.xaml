@@ -36,7 +36,7 @@
                 </MenuItem>
                 <MenuItem Header="Affichage">
                     <MenuItem Header="Clients" Command="{Binding ChangeViewCommand}" CommandParameter="customers"/>
-                    <MenuItem Header="Factures" Command="{Binding ChangeViewCommand}" CommandParameter="invoices"/>
+                    <MenuItem Header="Factures"  Command="{Binding ChangeViewCommand}" CommandParameter="invoices"/>
                 </MenuItem>
                 <MenuItem Header="Enregistrement">
                     <MenuItem Header="Nouveau" Command="{Binding AddNewItemCommand}" />
@@ -52,7 +52,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Rechercher : " VerticalAlignment="Center"/>
                 <TextBox Text="{Binding SearchCriteria}" Width="150" Height="30" VerticalContentAlignment="Center"/>
-                <Button Content="Recherche" Command="{Binding SearchCommand}"/>
+                <Button Content="Recherche" IsEnabled="{Binding ButtonEnabled, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"   Command="{Binding SearchCommand}"/>
             </StackPanel>
 
         </ToolBar>
