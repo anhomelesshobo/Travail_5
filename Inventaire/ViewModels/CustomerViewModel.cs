@@ -1,8 +1,11 @@
 ﻿using BillingManagement.Business;
 using BillingManagement.Models;
 using BillingManagement.UI.ViewModels.Commands;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 
 namespace BillingManagement.UI.ViewModels
 {
@@ -46,9 +49,14 @@ namespace BillingManagement.UI.ViewModels
 
         private void InitValues()
         {
-            Customers = new ObservableCollection<Customer>(customersDataService.GetAll());
+           Customers = new ObservableCollection<Customer>(customersDataService.GetAll().OrderBy(c => c.LastName));
             Debug.WriteLine(Customers.Count);
         }
+
+        //IEnumerable<Customer> GetAllCustomersByLastName(ObservableCollection<Customer> customers)
+        //{
+        //    return customers.OrderBy(c => c.LastName);
+        //}
 
         private void DeleteCustomer(Customer c)
         {

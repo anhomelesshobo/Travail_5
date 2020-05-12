@@ -1,5 +1,6 @@
 ﻿using BillingManagement.Models;
 using BillingManagement.UI.ViewModels.Commands;
+using Inventaire;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,7 +31,7 @@ namespace BillingManagement.UI.ViewModels
 			}
 		}
 
-
+		BillingContext db = new BillingContext();
 		CustomerViewModel customerViewModel;
 		InvoiceViewModel invoiceViewModel;
 
@@ -38,6 +39,7 @@ namespace BillingManagement.UI.ViewModels
 
 		public DelegateCommand<object> AddNewItemCommand { get; private set; }
 
+		public RelayCommand CloseApplicationCommand { get; set; }
 		public DelegateCommand<Invoice> DisplayInvoiceCommand { get; private set; }
 		public DelegateCommand<Customer> DisplayCustomerCommand { get; private set; }
 
@@ -47,6 +49,7 @@ namespace BillingManagement.UI.ViewModels
 		public MainViewModel()
 		{
 			ChangeViewCommand = new ChangeViewCommand(ChangeView);
+			CloseApplicationCommand = new RelayCommand(CloseApplication);
 			DisplayInvoiceCommand = new DelegateCommand<Invoice>(DisplayInvoice);
 			DisplayCustomerCommand = new DelegateCommand<Customer>(DisplayCustomer);
 
@@ -55,10 +58,12 @@ namespace BillingManagement.UI.ViewModels
 
 			customerViewModel = new CustomerViewModel();
 			invoiceViewModel = new InvoiceViewModel(customerViewModel.Customers);
-
+			
 			VM = customerViewModel;
 
 		}
+
+
 
 		private void ChangeView(string vm)
 		{
@@ -110,5 +115,9 @@ namespace BillingManagement.UI.ViewModels
 			return result;
 		}
 
+		private void CloseApplication(object parameter)
+		{
+			App.Current.Shutdown();
+		}
 	}
 }

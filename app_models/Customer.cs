@@ -7,6 +7,7 @@ namespace BillingManagement.Models
 {
     public class Customer : INotifyPropertyChanged
     {
+     
         private string name;
         private string lastName;
         private string address;
@@ -98,6 +99,8 @@ namespace BillingManagement.Models
         public string Info => $"{LastName}, {Name}";
 
         #endregion
+
+        public int CustomerID { get; set; }
 
         public Customer()
         {
