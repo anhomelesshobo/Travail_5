@@ -3,7 +3,11 @@ using BillingManagement.UI.ViewModels.Commands;
 using Inventaire;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
+using System.Windows;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BillingManagement.UI.ViewModels
 {
@@ -71,11 +75,56 @@ namespace BillingManagement.UI.ViewModels
 
 			customerViewModel = new CustomerViewModel();
 			invoiceViewModel = new InvoiceViewModel(customerViewModel.Customers);
-			
+			seedData(customerViewModel, invoiceViewModel);
 			VM = customerViewModel;
 
 		}
 
+		void seedData(CustomerViewModel cm, InvoiceViewModel im)
+		{
+			if (db.Customers != null)
+			{
+				db = new BillingContext();
+
+			}
+			else
+			{
+				for (int i = 0; i < cm.Customers.Count; i++)
+				{
+					db.Customers.Add(new Customer()
+					{
+						Name = cm.Customers[i].Name,
+						Address = cm.Customers[i].Address,
+						City = cm.Customers[i].City,
+						PostalCode = cm.Customers[i].PostalCode,
+						LastName = cm.Customers[i].LastName,
+						Province = cm.Customers[i].Province,
+						CustomerID = cm.Customers[i].CustomerID,
+						ContactInfos = cm.Customers[i].ContactInfos,
+						PicturePath = cm.Customers[i].PicturePath
+					});
+
+					db.Invoices.Add(new Invoice()
+					{
+						SubTotal = im.Invoices[i].SubTotal,
+						Customer = im.Invoices[i].Customer,
+
+					});
+
+
+					db.SaveChanges();
+
+				}
+			
+
+
+			}
+
+
+
+
+
+		}
 
 
 		private void ChangeView(string vm)
@@ -133,6 +182,10 @@ namespace BillingManagement.UI.ViewModels
 		private void searchcommand(object parameter)
 		{
 			
+		
+			
+
+
 		}
 		private void closeapplication(object parameter)
 		{

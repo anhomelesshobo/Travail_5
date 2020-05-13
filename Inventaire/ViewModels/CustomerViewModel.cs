@@ -12,7 +12,8 @@ namespace BillingManagement.UI.ViewModels
     public class CustomerViewModel : BaseViewModel
     {
         readonly CustomersDataService customersDataService = new CustomersDataService();
-
+        BillingContext db = new BillingContext();
+        public ObservableCollection<Customer> Allcustomers;
         private ObservableCollection<Customer> customers;
         private Customer selectedCustomer;
 
@@ -49,10 +50,12 @@ namespace BillingManagement.UI.ViewModels
 
         private void InitValues()
         {
-           Customers = new ObservableCollection<Customer>(customersDataService.GetAll().OrderBy(c => c.LastName));
-            Debug.WriteLine(Customers.Count);
+            Customers = new ObservableCollection<Customer>(customersDataService.GetAll().OrderBy(c => c.LastName));
+          
         }
 
+
+        
 
         private void DeleteCustomer(Customer c)
         {
