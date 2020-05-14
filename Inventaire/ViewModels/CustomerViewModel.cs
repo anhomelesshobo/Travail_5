@@ -54,8 +54,16 @@ namespace BillingManagement.UI.ViewModels
           
         }
 
+        public void ReturnAll()
+        {
+            Customers = new ObservableCollection<Customer>(customersDataService.GetAll().OrderBy(c => c.LastName));
+        }
 
-        
+        public void FindMethod(ObservableCollection<Customer> thesearch)
+        {
+            Customers = thesearch;
+            
+        }
 
         private void DeleteCustomer(Customer c)
         {

@@ -53,6 +53,7 @@
                 <TextBlock Text="Rechercher : " VerticalAlignment="Center"/>
                 <TextBox Text="{Binding SearchCriteria}"  Width="150" Height="30" VerticalContentAlignment="Center"/>
                 <Button Content="Recherche" IsEnabled="{Binding ButtonEnabled, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"   Command="{Binding SearchCommand}"/>
+                <Button Content="Retour" IsEnabled="{Binding ReturnButton, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"   Command="{Binding ReturnAllList}"/>
             </StackPanel>
 
         </ToolBar>
