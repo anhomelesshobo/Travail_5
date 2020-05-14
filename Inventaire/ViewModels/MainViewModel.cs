@@ -120,11 +120,15 @@ namespace BillingManagement.UI.ViewModels
 
 			if (db.Customers.Count() <= 0)
 			{
-				List<Customer> Customers = new CustomersDataService().GetAll().ToList();
-				List<Invoice> Invoices = new InvoicesDataService(Customers).GetAll().ToList();
-				foreach (Customer customer in Customers)
+				//List<Customer> Customers = new CustomersDataService().GetAll().ToList();
+				//List<Invoice> Invoices = new InvoicesDataService(Customers).GetAll().ToList();
+				foreach (Customer customer in customerViewModel.Customers)
 				{
 					db.Customers.Add(customer);
+				}				
+				foreach (Invoice invoice in invoiceViewModel.Invoices)
+				{
+					db.Invoices.Add(invoice);
 				}
 				db.SaveChanges();
 			}
